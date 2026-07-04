@@ -12,7 +12,21 @@
   <img width="222" height="227" alt="log-UTN 2" src="https://github.com/user-attachments/assets/4e1f2f7f-0178-444f-911a-454a80a7fc89" />
 </p>
 
-* **Cátedra:** Algoritmos y Estructuras de Datos
+* **Cátedra:** Algoritmos y Estructuras de Datos.
+* **Comisión:**C
 * **Año:** 2026
   
-Escenario 13: Sistema de administración e inscripción a cursos y talleres desarrollado en Python. Incluye registro de estudiantes, control de cupos, asignación y manejo de listas de espera.
+## Descripción General
+Este proyecto contará en un sistema desarrollado en Python que permite administrar la inscripción
+de estudiantes a cursos o talleres. 
+
+**Funcionalidades principales:**
+- Registro de estudiantes, con validación de DNI y nombre.
+- Inscripción de estudiantes a cursos, con control de cupo máximo.
+- Lista de espera automática cuando un curso no tiene cupo disponible.
+- Visualización de cursos y cupos disponibles en tiempo real.
+- Estadísticas: total de inscriptos, total de estudiantes registrados y curso
+  con mayor demanda.
+
+El sistema utiliza estructuras condicionales, estructuras repetitivas, funciones, validaciones de datos, manejo de errores, y
+acumuladores/contadores para calcular las estadísticas.
