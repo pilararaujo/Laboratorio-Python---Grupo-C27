@@ -6,7 +6,6 @@
 
 ## 📚 Información Académica
 <p align="center">
-  
 **Universidad Tecnológica Nacional - Facultad Regional Resistencia**
 
 </p>
