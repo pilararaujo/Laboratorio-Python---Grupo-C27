@@ -10,6 +10,7 @@
 <p align="center">
   <img width="222" height="227" alt="log-UTN 2" src="https://github.com/user-attachments/assets/4e1f2f7f-0178-444f-911a-454a80a7fc89" />
 </p>
+
 * **Cátedra:** Algoritmos y Estructuras de Datos
 * **Año:** 2026
   
