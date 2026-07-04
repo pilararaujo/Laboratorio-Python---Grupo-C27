@@ -5,7 +5,7 @@
 * **Sosa, Milena Tali** - Legajo: 31041
 
 ## 📚 Información Académica
-* **Universidad Tecnológica Nacional - Facultad Regional Resistencia**
+**Universidad Tecnológica Nacional - Facultad Regional Resistencia**
 * **Cátedra:** Algoritmos y Estructuras de Datos
 * **Año:** 2026
   
