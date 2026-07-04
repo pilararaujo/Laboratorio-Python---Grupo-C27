@@ -6,8 +6,10 @@
 
 ## 📚 Información Académica
 **Universidad Tecnológica Nacional - Facultad Regional Resistencia**
-<img width="222" height="227" alt="log-UTN 2" src="https://github.com/user-attachments/assets/93f9bbb9-3cb8-475e-ba57-2aec7ccc5486" />
 
+<p align="center">
+  <img src="TuEnlaceDeImagenAca" width="150" alt="log-UTN 2" src="https://github.com/user-attachments/assets/93f9bbb9-3cb8-475e-ba57-2aec7ccc5486" />
+</p>
 * **Cátedra:** Algoritmos y Estructuras de Datos
 * **Año:** 2026
   
