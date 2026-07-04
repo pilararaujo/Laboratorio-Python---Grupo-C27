@@ -13,7 +13,7 @@
 </p>
 
 * **Cátedra:** Algoritmos y Estructuras de Datos.
-* **Comisión:**C
+* **Comisión:** C
 * **Año:** 2026
   
 ## Descripción General
