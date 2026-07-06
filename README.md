@@ -35,10 +35,10 @@ acumuladores/contadores para calcular las estadísticas.
 Para la organización y desarrollo de este taller, adoptamos un método de trabajo donde dividimos las tareas para optimizar los tiempos disponible antes de la fecha límite de entrega del proyecto, permitiendonos equilibrar la carga horaria y la complejidad del taller con el resto de nuestras responsabilidades académicas y personales.
  En primera instancia, optamos por diseñar una estructura básica del código, desarrollando el proceso y las funciones o procedimientos principales del algoritmo, utilizando el Pseudocódigo dictado por la cátedra. Implementamos **Inteligencia Artificial** como herramienta de asistencia para traducir nuestra lógica base al lenguaje Python. Utilizando el material teórico brindado por la cátedra, pudimos verificar la correlación directa y la equivalencia entre las estructuras de control en pseudocódigo y su sintaxis correspondiente en Python. Y, por último, mediante el diseño de prompts específicos y detallados, solicitamos a la IA la detección de posibles errores de lógica, y la propuesta de optimización y ámpliación del código.
 
-### **´´´Nuestro Desarrollo del Algoritmo En Pseudocódigo´´´**
-Acción SistemadeInscripciones es
+### _Nuestro Desarrollo del Algoritmo En Pseudocódigo_
 
-    //PROCEDIMIENTO 1: MOSTRAR CURSOS
+Acción SistemadeInscripciones es
+  PROCEDIMIENTO 1: MOSTRAR CURSOS
    
     PROCEDIMIENTO mostrar_cursos()
         Curso: caracter
@@ -62,19 +62,19 @@ Acción SistemadeInscripciones es
     FIN_PROCEDIMIENTO
 
 
-    // FUNCION 2: Buscar Cupo
+  FUNCION 2: Buscar Cupo
    
-   FUNCION obtener_cupo_maximo(curso_buscado : Caracter) : Entero
-    Curso_actual: Caracter
-    Cupo_actual_str: Caracter
-    Encontrado: Booleano // bandera de control
+     FUNCION obtener_cupo_maximo(curso_buscado : Caracter) : Entero
+      Curso_actual: Caracter
+      Cupo_actual_str: Caracter
+      Encontrado: Booleano // bandera de control
     
-    obtener_cupo_maximo := 0
-    Encontrado := Falso 
+      obtener_cupo_maximo := 0
+      Encontrado := Falso 
     
-    ABRIR(cursos.txt, leer)
+      ABRIR(cursos.txt, leer)
     
-    Mientras NFDA (cursos.txt) Y (Encontrado = Falso) hacer
+      Mientras NFDA (cursos.txt) Y (Encontrado = Falso) hacer
         LEER(cursos.txt, curso_actual)
         LEER(cursos.txt, cupo_actual_str)
         
@@ -82,13 +82,13 @@ Acción SistemadeInscripciones es
             obtener_cupo_maximo := CONVERTIR_A_ENTERO(cupo_actual_str)
             Encontrado := Verdadero // ¡Lo encontramos! Esto frena el bucle en la próxima vuelta
         FIN_SI
-    FIN_MIENTRAS
+     FIN_MIENTRAS
     
-    CERRAR(cursos.txt)
-FIN_FUNCION
+     CERRAR(cursos.txt)
+    FIN_FUNCION
 
 
-       // PROCEDIMIENTO 3: REGISTRAR ALUMNO
+PROCEDIMIENTO 3: REGISTRAR ALUMNO
     
     PROCEDIMIENTO registrar_inscripcion(alumno : caracter, curso : caracter)
         // Abrimos el archivo 
@@ -104,21 +104,21 @@ FIN_FUNCION
 
 
 
-  // PROCEDIMIENTO 4: ESTADÍSTICAS POR CARRERA
+PROCEDIMIENTO 4: ESTADÍSTICAS POR CARRERA
 
-PROCEDIMIENTO mostrar_estadisticas()
-    curso_catalogo : Caracter
-    cupo_catalogo : Caracter
-    alumno_inscripto : Caracter
-    curso_inscripto : Caracter
-    contador_por_curso : Entero
+     PROCEDIMIENTO mostrar_estadisticas()
+       curso_catalogo : Caracter
+       cupo_catalogo : Caracter
+       alumno_inscripto : Caracter
+       curso_inscripto : Caracter
+       contador_por_curso : Entero
     
-    ESCRIBIR ("ESTADÍSTICAS DE INSCRITOS POR CARRERA")
+      ESCRIBIR ("ESTADÍSTICAS DE INSCRITOS POR CARRERA")
     
     // 1. Abrimos el archivo de cursos para saber qué carreras existen
     ABRIR(cursos.txt, LEER)
     
-    MIENTRAS NO NFDA (cursos.txt) HACER
+     MIENTRAS NO NFDA (cursos.txt) HACER
         LEER(cursos.txt, curso_catalogo)
         LEER(cursos.txt, cupo_catalogo)
         
@@ -145,12 +145,12 @@ PROCEDIMIENTO mostrar_estadisticas()
             // Mostramos el resultado en pantalla para esta carrera
             ESCRIBIR ("- ", curso_catalogo, ": ", contador_por_curso, " inscriptos.")
         FIN_SI
-    FIN_MIENTRAS
+     FIN_MIENTRAS
     
-    CERRAR("cursos.txt")
-    FIN_PROCEDIMIENTO
+     CERRAR("cursos.txt")
+     FIN_PROCEDIMIENTO
 
-     // PROCESO PRINCIPAL 
+PROCESO PRINCIPAL 
  
     PROCEDIMIENTO iniciar_programa()
         nombre_alumno : Caracter
