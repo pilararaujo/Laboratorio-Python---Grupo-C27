@@ -2,7 +2,7 @@
 ## 👥 Integrantes
 * **Araujo Ledezma, Pilar** - Legajo: 31527
 * **Perez, Bianca Belen** - Legajo: 31883
-* **Sosa, Milena Tali** - Legajo: 31041
+* **Sosa, Milena Tali** - Legajo:  31041
 
 ## 📚 Información Académica
 
