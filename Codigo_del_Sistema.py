@@ -50,6 +50,8 @@ def mostrar_cursos():
     # cambio: Se usó zip(): Recorre de a pares de forma limpia y moderna sin usar índices manuales i e i+1 (Evita IndexError)
     for curso, cupo in zip(lineas[0::2], lineas[1::2]):
         print(f"- {curso}. Cupos disponibles: {cupo}")
+        print("===================================\n") #agregamos una linea de separacion para que se vea mas prolijo
+
     
 
 def obtener_cupo_maximo(curso_buscado):
@@ -65,13 +67,6 @@ def obtener_cupo_maximo(curso_buscado):
             except ValueError:
                 return 0
     return 0
-
-def obtener_todas_las_inscripciones():
-    """NUEVA FUNCIÓN: Usa Counter: Abre inscripciones.txt UNA SOLA VEZ y cuenta todo. Reemplaza el bucle ineficiente O(N)."""
-    lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
-    # CAMBIO: Toma las líneas impares (cursos) asociadas a cada inscripción
-    cursos_inscriptos = [lineas[i].casefold() for i in range(1, len(lineas), 2)]
-    return Counter(cursos_inscriptos)  # CAMBIO: Devuelve un diccionario contador eficiente (Ej: {"programacion": 3, "ingles": 1})
 
 #quitamos la función contar_inscriptos y la reemplazamos por las funciones obtener_todas_las_inscripciones y alumno_ya_inscripto, que son más eficientes y limpias. 
 def obtener_todas_las_inscripciones():
