@@ -184,4 +184,7 @@ PROCESO PRINCIPAL
 <img width="1366" height="639" alt="image" src="https://github.com/user-attachments/assets/d3bd2dc0-6461-4706-ba4f-946fbe29ee0c" />
 </p>
 
+De la respuesta a este Prompt, obtenemos nuestro primer commit ("Traducción del código a Python"). Donde se corrigen errores de nuestro código base y se lo pasa a su versión del lenguaje solicitado.
+Es por esto que, si bien este commit contiene todo nuestro desarrollo, debemos aclarar que **dicha estructura en pseudocódigo sí fue desarrollada en un lapso de tiempo más prolongado.**
+
 
