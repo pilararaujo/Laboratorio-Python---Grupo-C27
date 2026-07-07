@@ -2,7 +2,7 @@
 Sistema de Gestión de Inscripciones - Academia
 Traducción a Python del pseudocódigo original.
 """
-from collection import Counter # cambio: se importó counter para leer el archivo de inscripciones de una sola vez (optimización) 
+from collections import Counter # cambio: se importó counter para leer el archivo de inscripciones de una sola vez (optimización) 
 import os
 
 ARCHIVO_CURSOS = "cursos.txt"
@@ -19,18 +19,28 @@ CURSOS_INICIALES = [
     "Redes y Soporte Tecnico"
 ]
 
-
+def leer_archivo_seguro(ruta): #agregamos esta función para leer archivos de manera segura y evitar errores si el archivo no existe.
+    """Lee un archivo de forma segura devolviendo sus líneas limpias."""
+    if not os.path.exists(ruta):
+        return []
+    try:
+        with open(ruta, "r", encoding="utf-8") as archivo:
+            return [linea.strip() for linea in archivo if linea.strip()]
+    except PermissionError:
+        print(f"Error: El archivo {ruta} está abierto en otro programa.")
+        return []
+    
 def inicializar_cursos():
     """Crea cursos.txt con los 6 cursos y cupo=10 SOLO si el archivo no existe aun.
     (El pseudocodigo original nunca creaba este archivo, asumia que ya existia)."""
     if not os.path.exists(ARCHIVO_CURSOS):
         try: #cambio: se agrega un try para manejar errores de escritura en el archivo 
-        with open(ARCHIVO_CURSOS, "w", encoding="utf-8") as archivo:
-            for curso in CURSOS_INICIALES:
+            with open(ARCHIVO_CURSOS, "w", encoding="utf-8") as archivo:
+              for curso in CURSOS_INICIALES:
                 archivo.write(curso + "\n")
                 archivo.write(str(CUPO_INICIAL) + "\n")
         except PermissionError: #cambio: se agrega un except para manejar errores de permisos de escritura en el archivo 
-        print("Error de permisos al crear el catálogo de cursos. Asegurese de tener permisos de escritura en el directorio.")
+            print("Error de permisos al crear el catálogo de cursos. Asegurese de tener permisos de escritura en el directorio.")
 
 def mostrar_cursos():
     """PROCEDIMIENTO 1: Muestra la lista de cursos disponibles con su cupo maximo."""
@@ -56,60 +66,67 @@ def obtener_cupo_maximo(curso_buscado):
                 return 0
     return 0
 
+def obtener_todas_las_inscripciones():
+    """NUEVA FUNCIÓN: Usa Counter: Abre inscripciones.txt UNA SOLA VEZ y cuenta todo. Reemplaza el bucle ineficiente O(N)."""
+    lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
+    # CAMBIO: Toma las líneas impares (cursos) asociadas a cada inscripción
+    cursos_inscriptos = [lineas[i].casefold() for i in range(1, len(lineas), 2)]
+    return Counter(cursos_inscriptos)  # CAMBIO: Devuelve un diccionario contador eficiente (Ej: {"programacion": 3, "ingles": 1})
 
-def contar_inscriptos(curso_buscado):
-    """NUEVA FUNCION (no estaba en el pseudocodigo original).
-    Cuenta cuantos alumnos ya estan inscriptos en un curso, leyendo inscripciones.txt.
-    Es necesaria porque cursos.txt solo guarda el cupo MAXIMO inicial y nunca se actualiza,
-    entonces sin esto no hay forma de saber cuantos lugares quedan realmente."""
-    if not os.path.exists(ARCHIVO_INSCRIPCIONES):
-        return 0  # si el archivo todavia no existe, nadie esta inscripto
+#quitamos la función contar_inscriptos y la reemplazamos por las funciones obtener_todas_las_inscripciones y alumno_ya_inscripto, que son más eficientes y limpias. 
+def obtener_todas_las_inscripciones():
+    """NUEVA FUNCIÓN: Usa Counter: Abre inscripciones.txt UNA SOLA VEZ y cuenta todo. Reemplaza el bucle ineficiente O(N)."""
+    lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
+    # CAMBIO: Toma las líneas impares (cursos) asociadas a cada inscripción
+    cursos_inscriptos = [lineas[i].casefold() for i in range(1, len(lineas), 2)]
+    return Counter(cursos_inscriptos)  # CAMBIO: Devuelve un diccionario contador eficiente (Ej: {"programacion": 3, "ingles": 1})
 
-    with open(ARCHIVO_INSCRIPCIONES, "r", encoding="utf-8") as archivo:
-        lineas = archivo.readlines()
 
-    contador = 0
-    for i in range(0, len(lineas), 2):
-        curso_inscripto = lineas[i + 1].strip()
-        if curso_inscripto == curso_buscado:
-            contador += 1
-
-    return contador
+def alumno_ya_inscripto(alumno_buscado, curso_buscado):
+    """NUEVA FUNCIÓN: Regla de negocio: Valida si la combinación Alumno-Curso ya existe para evitar inscripciones duplicadas."""
+    lineas = leer_archivo_seguro(ARCHIVO_INSCRIPCIONES)
+    for alumno, curso in zip(lineas[0::2], lineas[1::2]):
+        # CAMBIO: casefold() en ambos datos -> Evita que "Juan" se anote dos veces por llamarse "juan" o "JUAN"
+        if alumno.casefold() == alumno_buscado.casefold() and curso.casefold() == curso_buscado.casefold():
+            return True
+    return False
 
 
 def registrar_inscripcion(alumno, curso):
     """PROCEDIMIENTO 3: Guarda al alumno en inscripciones.txt.
     Usamos modo "a" (append = agregar) para sumar al final del archivo
     sin borrar a los alumnos que ya estaban registrados."""
-    with open(ARCHIVO_INSCRIPCIONES, "a", encoding="utf-8") as archivo:
-        archivo.write(alumno + "\n")
-        archivo.write(curso + "\n")
-
-    print("Estudiante registrado con exito.")
+    try: #cambio: se agregar try/except par amanejar errores de escritura
+        with open(ARCHIVO_INSCRIPCIONES, "a", encoding="utf-8") as archivo:
+          archivo.write(alumno + "\n")
+          archivo.write(curso + "\n")
+        print("Estudiante registrado con exito.")
+    except PermissionError:
+        print("No se pudo registrar la inscripción debido a un error de permisos.")
 
 
 def registrar_espera(alumno, curso):
     """NUEVO PROCEDIMIENTO (faltaba por completo en el pseudocodigo original).
     Guarda al alumno en espera.txt cuando el curso elegido ya no tiene cupos."""
-    with open(ARCHIVO_ESPERA, "a", encoding="utf-8") as archivo:
-        archivo.write(alumno + "\n")
-        archivo.write(curso + "\n")
+    try: # cambio: se agregar try/except par amanejar errores de escritura
+        with open(ARCHIVO_ESPERA, "a", encoding="utf-8") as archivo:
+          archivo.write(alumno + "\n")
+          archivo.write(curso + "\n")
 
-    print("El curso esta completo. El alumno fue agregado a la lista de espera.")
-
+        print("El curso esta completo. El alumno fue agregado a la lista de espera.")
+    except PermissionError:
+        print("No se pudo registrar la inscripción en espera debido a un error de permisos.")
 
 def mostrar_estadisticas():
     """PROCEDIMIENTO 4: Muestra cuantos alumnos estan inscriptos en cada curso."""
     print("\nESTADISTICAS DE INSCRITOS POR CARRERA")
-
-    with open(ARCHIVO_CURSOS, "r", encoding="utf-8") as archivo:
-        lineas_cursos = archivo.readlines()
-
-    for i in range(0, len(lineas_cursos), 2):
-        curso_catalogo = lineas_cursos[i].strip()
-        if curso_catalogo != "":
-            contador_por_curso = contar_inscriptos(curso_catalogo)
-            print(f"- {curso_catalogo}: {contador_por_curso} inscriptos.")
+lineas_cursos = leer_archivo_seguro(ARCHIVO_CURSOS)
+conteo_total = obtener_todas_las_inscripciones()  # CAMBIO: Llama a la optimización con Counter: Cero lecturas repetidas de archivo
+#quitamos with 
+for curso_catalogo in lineas_cursos[0::2]:
+        # CAMBIO: Busca directamente en el mapa de Counter usando minúsculas -> Rápido y seguro
+        contador_por_curso = conteo_total[curso_catalogo.casefold()]
+        print(f"- {curso_catalogo}: {contador_por_curso} inscriptos.")
 
 
 def iniciar_programa():
