@@ -187,4 +187,5 @@ PROCESO PRINCIPAL
 De la respuesta a este Prompt, obtenemos nuestro primer commit ("Traducción del código a Python"). Donde se corrigen errores de nuestro código base y se lo pasa a su versión del lenguaje solicitado.
 Es por esto que, si bien este commit contiene todo nuestro desarrollo, debemos aclarar que **dicha estructura en pseudocódigo sí fue desarrollada en un lapso de tiempo más prolongado.**
 
+Luego de esto realizamos ajustes para prevenir errores y cambiamos algunas funciones para lograr una mejora del sistema. Cada uno de estos cambios fue comentado.
 
